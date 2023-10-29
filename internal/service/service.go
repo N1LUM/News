@@ -9,6 +9,11 @@ import (
 )
 
 type PaperService interface {
+	Create(paperInput *models.PaperCreateInput) (*models.Paper, error)
+	GetList() ([]*models.Paper, error)
+	GetByID(id string) (*models.Paper, error)
+	Update(paperInput *models.PaperUpdateInput, id string) (*models.Paper, error)
+	Delete(id string) (bool, error)
 }
 type AuthorService interface {
 	Create(authorInput *models.AuthorCreateInput) (*models.Author, error)

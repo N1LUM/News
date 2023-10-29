@@ -38,7 +38,6 @@ func (a *AuthorService) Create(authorInput *models.AuthorCreateInput) (*models.A
 		Name:      authorInput.Name,
 		Lastname:  authorInput.Lastname,
 		Sex:       authorInput.Sex,
-		Age:       authorInput.Age,
 		BornDate:  bornDate,
 		Country:   authorInput.Country,
 		City:      authorInput.City,
@@ -107,9 +106,6 @@ func (a *AuthorService) Update(authorInput *models.AuthorUpdateInput, id string)
 	}
 	if authorInput.Sex != nil {
 		author.Sex = *authorInput.Sex
-	}
-	if authorInput.Age != nil {
-		author.Age = *authorInput.Age
 	}
 	if authorInput.BornDate != nil {
 		bornDate, err := time.Parse("2006-01-02", *authorInput.BornDate)

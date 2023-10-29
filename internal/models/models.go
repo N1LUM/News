@@ -23,7 +23,6 @@ type Author struct {
 	Name      string     `json:"name" form:"name"`
 	Lastname  string     `json:"lastname" form:"lastname"`
 	Sex       string     `json:"sex" form:"sex"`
-	Age       int        `json:"age" form:"age"`
 	BornDate  time.Time  `json:"bornDate" form:"bornDate"`
 	Country   string     `json:"country" form:"country"`
 	City      string     `json:"city" form:"city"`
@@ -46,7 +45,6 @@ type AuthorCreateInput struct {
 	Name     string `json:"name" form:"name"`
 	Lastname string `json:"lastname" form:"lastname"`
 	Sex      string `json:"sex" form:"sex"`
-	Age      int    `json:"age" form:"age"`
 	BornDate string `json:"bornDate" form:"bornDate"`
 	Country  string `json:"country" form:"country"`
 	City     string `json:"city" form:"city"`
@@ -56,8 +54,24 @@ type AuthorUpdateInput struct {
 	Name     *string `json:"name" form:"name"`
 	Lastname *string `json:"lastname" form:"lastname"`
 	Sex      *string `json:"sex" form:"sex"`
-	Age      *int    `json:"age" form:"age"`
 	BornDate *string `json:"bornDate" form:"bornDate"`
 	Country  *string `json:"country" form:"country"`
 	City     *string `json:"city" form:"city"`
+}
+
+type PaperCreateInput struct {
+	TitleImage string  `json:"titleImage" form:"titleImage"`
+	Title      string  `json:"title" form:"title"`
+	Subtitle   string  `json:"subtitle" form:"subtitle"`
+	Text       string  `json:"text" form:"text"`
+	Image      *string `json:"image" form:"image"`
+	Author     Author  `json:"author" form:"author"`
+}
+type PaperUpdateInput struct {
+	TitleImage string  `json:"titleImage" form:"titleImage"`
+	Title      string  `json:"title" form:"title"`
+	Subtitle   string  `json:"subtitle" form:"subtitle"`
+	Text       string  `json:"text" form:"text"`
+	Image      *string `json:"image" form:"image"`
+	Author     Author  `json:"author" form:"author"`
 }
