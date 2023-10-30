@@ -1,20 +1,21 @@
 package models
 
 import (
+	"mime/multipart"
 	"time"
 )
 
 type Paper struct {
-	ID         string     `gorm:"primaryKey" json:"id" form:"id"`
-	TitleImage string     `json:"titleImage" form:"titleImage"`
-	Title      string     `json:"title" form:"title"`
-	Subtitle   string     `json:"subtitle" form:"subtitle"`
-	Text       string     `json:"text" form:"text"`
-	Image      *string    `json:"image" form:"image"`
-	Author     Author     `json:"author" form:"author"`
-	CreatedAt  time.Time  `json:"createdAt" form:"createdAt"`
-	UpdatedAt  time.Time  `json:"updatedAt" form:"updatedAt"`
-	DeletedAt  *time.Time `json:"deletedAt" form:"deletedAt"`
+	ID            string     `gorm:"primaryKey" json:"id" form:"id"`
+	TitleImageURL string     `json:"titleImageURL" form:"titleImageURL"`
+	Title         string     `json:"title" form:"title"`
+	Subtitle      string     `json:"subtitle" form:"subtitle"`
+	Content       string     `json:"text" form:"text"`
+	AuthorID      string     `json:"authorID" form:"authorID"`
+	Author        Author     `json:"author" form:"author"`
+	CreatedAt     time.Time  `json:"createdAt" form:"createdAt"`
+	UpdatedAt     time.Time  `json:"updatedAt" form:"updatedAt"`
+	DeletedAt     *time.Time `json:"deletedAt" form:"deletedAt"`
 }
 
 type Author struct {
@@ -29,15 +30,6 @@ type Author struct {
 	CreatedAt time.Time  `json:"createdAt" form:"createdAt"`
 	UpdatedAt time.Time  `json:"updatedAt" form:"updatedAt"`
 	DeletedAt *time.Time `json:"deletedAt" form:"deletedAt"`
-}
-
-type PaperInput struct {
-	TitleImage string  `json:"titleImage" form:"titleImage"`
-	Title      string  `json:"title"form:"title" `
-	Subtitle   string  `json:"subtitle"form:"subtitle" `
-	Text       string  `json:"text" form:"text"`
-	Image      *string `json:"image" form:"image"`
-	Author     Author  `json:"author" form:"author"`
 }
 
 type AuthorCreateInput struct {
@@ -60,18 +52,17 @@ type AuthorUpdateInput struct {
 }
 
 type PaperCreateInput struct {
-	TitleImage string  `json:"titleImage" form:"titleImage"`
-	Title      string  `json:"title" form:"title"`
-	Subtitle   string  `json:"subtitle" form:"subtitle"`
-	Text       string  `json:"text" form:"text"`
-	Image      *string `json:"image" form:"image"`
-	Author     Author  `json:"author" form:"author"`
+	TitleImage    multipart.FileHeader `json:"titleImage" form:"titleImage"`
+	TitleImageURL string               `json:"titleImageURL" form:"titleImageURL"`
+	Title         string               `json:"title" form:"title"`
+	Subtitle      string               `json:"subtitle" form:"subtitle"`
+	Content       string               `json:"text" form:"text"`
+	AuthorID      string               `json:"authorID" form:"authorID"`
 }
 type PaperUpdateInput struct {
-	TitleImage string  `json:"titleImage" form:"titleImage"`
-	Title      string  `json:"title" form:"title"`
-	Subtitle   string  `json:"subtitle" form:"subtitle"`
-	Text       string  `json:"text" form:"text"`
-	Image      *string `json:"image" form:"image"`
-	Author     Author  `json:"author" form:"author"`
+	TitleImage    *multipart.FileHeader `json:"titleImage" form:"titleImage"`
+	TitleImageURL *string               `json:"titleImageURL" form:"titleImageURL"`
+	Title         *string               `json:"title" form:"title"`
+	Subtitle      *string               `json:"subtitle" form:"subtitle"`
+	Content       *string               `json:"text" form:"text"`
 }

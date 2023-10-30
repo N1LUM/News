@@ -18,11 +18,19 @@ func (h *Handler) InitRouter() *gin.Engine {
 	//}
 	user := router.Group("/authors")
 	{
-		user.POST("/create", h.Create)
-		user.GET("/getList", h.GetList)
-		user.GET("/getByID/:id", h.GetByID)
-		user.PUT("/update/:id", h.Update)
-		user.DELETE("/delete/:id", h.Delete)
+		user.POST("/create", h.CreateAuthor)
+		user.GET("/getList", h.GetListAuthor)
+		user.GET("/getByID/:id", h.GetByIDAuthor)
+		user.PUT("/update/:id", h.UpdateAuthor)
+		user.DELETE("/delete/:id", h.DeleteAuthor)
+	}
+	paper := router.Group("/papers")
+	{
+		paper.POST("/create", h.CreatePaper)
+		paper.GET("/getList", h.GetListPaper)
+		paper.GET("/getByID/:id", h.GetByIDPaper)
+		paper.PUT("/update/:id", h.UpdatePaper)
+		paper.DELETE("/delete/:id", h.DeletePaper)
 	}
 
 	return router

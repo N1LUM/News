@@ -17,8 +17,8 @@ func NewPaperRepository(db *gorm.DB) *PaperRepository {
 	}
 }
 
-func (p *PaperRepository) Create(news *models.Paper) (*models.Paper, error) {
-	result := p.db.Create(&news)
+func (p *PaperRepository) Create(paper *models.Paper) (*models.Paper, error) {
+	result := p.db.Create(&paper)
 	if result.Error != nil {
 		_, file, line, _ := runtime.Caller(0)
 		logrus.WithFields(logrus.Fields{
@@ -29,11 +29,11 @@ func (p *PaperRepository) Create(news *models.Paper) (*models.Paper, error) {
 		return nil, result.Error
 	}
 	logrus.Info("Article created successful")
-	return news, nil
+	return paper, nil
 }
 func (p *PaperRepository) GetList() ([]*models.Paper, error) {
-	var news []*models.Paper
-	result := p.db.Find(&news)
+	var papers []*models.Paper
+	result := p.db.Find(&papers)
 	if result.Error != nil {
 		_, file, line, _ := runtime.Caller(0)
 		logrus.WithFields(logrus.Fields{
@@ -44,25 +44,25 @@ func (p *PaperRepository) GetList() ([]*models.Paper, error) {
 		return nil, result.Error
 	}
 	logrus.Info("Article list got successful")
-	return news, nil
+	return papers, nil
 }
 func (p *PaperRepository) GetByID(id string) (*models.Paper, error) {
-	var news *models.Paper
-	result := p.db.Where("id = ?", id).Find(&news)
+	var paper *models.Paper
+	result := p.db.Where("id = ?", id).Find(&paper)
 	if result.Error != nil {
 		_, file, line, _ := runtime.Caller(0)
 		logrus.WithFields(logrus.Fields{
 			"file":  file,
 			"line":  line - 2,
 			"error": result.Error,
-		}).Error("Author couldn't GET BY ID")
+		}).Error("Paper couldn't GET BY ID")
 		return nil, result.Error
 	}
-	logrus.Info("Article by ID got successful")
-	return news, nil
+	logrus.Info("Paper by ID got successful")
+	return paper, nil
 }
-func (p *PaperRepository) Update(news *models.Paper, id string) (*models.Paper, error) {
-	result := p.db.Where("id = ?", id).Save(&news)
+func (p *PaperRepository) Update(paper *models.Paper, id string) (*models.Paper, error) {
+	result := p.db.Where("id = ?", id).Save(&paper)
 	if result.Error != nil {
 		_, file, line, _ := runtime.Caller(0)
 		logrus.WithFields(logrus.Fields{
@@ -73,11 +73,11 @@ func (p *PaperRepository) Update(news *models.Paper, id string) (*models.Paper, 
 		return nil, result.Error
 	}
 	logrus.Info("Article by ID update successful")
-	return news, nil
+	return paper, nil
 }
 func (p *PaperRepository) Delete(id string) (bool, error) {
-	news := models.Paper{}
-	result := p.db.Where("id = ?", id).Delete(&news)
+	paper := models.Paper{}
+	result := p.db.Where("id = ?", id).Delete(&paper)
 	if result.Error != nil {
 		_, file, line, _ := runtime.Caller(0)
 		logrus.WithFields(logrus.Fields{
